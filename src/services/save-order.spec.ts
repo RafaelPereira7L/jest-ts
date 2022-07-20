@@ -1,13 +1,24 @@
-describe('testing some service', () => {
-  it('should return 1', () => {
-    const number = 1;
-    expect(number).toBe(1);
-  });
-});
+import { SaveOrder } from './save-order';
 
-describe('testing some service', () => {
-  test('should return Rafael', () => {
-    const nome = 'Rafael';
-    expect(nome).toBe('Rafael');
+describe('SaveOrder persistency', () => {
+  afterEach(() => jest.clearAllMocks());
+
+  it('should return undefined', () => {
+    // SUT = System Under Test
+    const sut = new SaveOrder();
+    expect(sut.saveOrder()).toBeUndefined();
+  });
+
+  it('should call console.log once', () => {
+    const sut = new SaveOrder();
+    const consoleSpy = jest.spyOn(console, 'log');
+    sut.saveOrder();
+    expect(consoleSpy).toHaveBeenCalledTimes(1);
+  });
+  it('should call console.log once with "Order has been saved!"', () => {
+    const sut = new SaveOrder();
+    const consoleSpy = jest.spyOn(console, 'log');
+    sut.saveOrder();
+    expect(consoleSpy).toHaveBeenCalledWith('Order has been saved!');
   });
 });
